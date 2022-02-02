@@ -28,4 +28,16 @@ public class ContactHelper extends HelperBase {
     public void initContactCreation() {
         click(By.name("firstname"));
     }
+
+    public void selectContact() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td/input"));
+    }
+
+    public void initContactModification() {
+        click(By.xpath("//tr[3]/td[8]/a/img"));
+    }
+
+    public void submitContactModification() {
+        click(By.xpath("//input[22]"));
+    }
 }
