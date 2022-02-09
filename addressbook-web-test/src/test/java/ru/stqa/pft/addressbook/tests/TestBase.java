@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook.test;
+package ru.stqa.pft.addressbook.tests;
 
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterMethod;
