@@ -9,6 +9,6 @@ public class ContactCreationTest extends TestBase {
     public void testContactCreation() throws Exception {
         app.getNavigationHelper().gotoContactPage();
         app.getContactHelper().createContact(new ContactData("Ostap", "Bender",
-                "221B Baker Street", null, "testTest@mail.ru", "Test1"), true);
+                "221B Baker Street", null, "testTest@mail.ru", "Test1"));
     }
 }

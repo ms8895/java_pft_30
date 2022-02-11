@@ -12,7 +12,7 @@ public class ContactDeletionTest extends TestBase {
         if (!app.getContactHelper().isThereAContact()) {
             app.getNavigationHelper().gotoContactPage();
             app.getContactHelper().createContact(new ContactData("Ostap", "Bender",
-                    "221B Baker Street", null, "testTest@mail.ru", "Test1"), true);
+                    "221B Baker Street", null, "testTest@mail.ru", "Test1"));
         }
         app.getContactHelper().selectContact();
         app.getContactHelper().deleteSelectedContact();

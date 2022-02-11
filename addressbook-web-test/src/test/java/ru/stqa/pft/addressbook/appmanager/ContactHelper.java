@@ -27,10 +27,6 @@ public class ContactHelper extends HelperBase {
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("email"), contactData.getEmail());
 
-        creationTorF(contactData, creation);
-    }
-
-    private void creationTorF(ContactData contactData, boolean creation) {
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
@@ -62,11 +58,16 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void createContact(ContactData contact, boolean creation) {
+    public void createContact(ContactData contact) {
         initContactCreation();
-        fillContactForm(contact, creation);
+        fillContactForm(contact);
         submitContactCreation();
         returnContactHomePage();
+        
+    }
+
+    public void fillContactForm(ContactData contactData) {
+
     }
 
     public boolean isThereAContact() {
