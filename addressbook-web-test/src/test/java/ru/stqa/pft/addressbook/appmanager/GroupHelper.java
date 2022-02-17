@@ -58,4 +58,8 @@ public class GroupHelper extends HelperBase {
     public boolean isGroupPresent(String groupname) {
         return isElementPresent(By.xpath("//input[@title='Select (" + groupname + ")']"));
     }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
