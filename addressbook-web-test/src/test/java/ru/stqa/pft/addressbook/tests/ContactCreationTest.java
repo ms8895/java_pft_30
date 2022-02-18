@@ -6,6 +6,6 @@ public class ContactCreationTest extends TestBase {
 
     @Test
     public void testContactCreation() throws Exception {
-        app.getContactHelper().createGroupAndContact(app);
+        app.getContactHelper().createGroupAndContact();
     }
 }

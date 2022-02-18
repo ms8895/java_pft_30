@@ -9,8 +9,11 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 public class ContactHelper extends HelperBase {
 
-    public ContactHelper(WebDriver wd) {
+    private ApplicationManager app;
+
+    public ContactHelper(WebDriver wd, ApplicationManager app) {
         super(wd);
+        this.app = app;
     }
 
     public void returnContactHomePage() {
@@ -21,12 +24,8 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
-        type(By.name("firstname"), contactData.getFirstname());
-        type(By.name("lastname"), contactData.getLastname());
-        type(By.name("address"), contactData.getAddress());
-        type(By.name("mobile"), contactData.getMobile());
-        type(By.name("email"), contactData.getEmail());
+    public void fillContactFormIsGroup(ContactData contactData, boolean creation) {
+        fillContactForm(contactData);
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -79,7 +78,8 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createGroupAndContact(ApplicationManager app) {
+
+    public void createGroupAndContact() {
         app.getNavigationHelper().gotoGroupPage();
         if (!app.getGroupHelper().isGroupPresent("Test1")) {
             app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test"));

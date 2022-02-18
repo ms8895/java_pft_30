@@ -43,7 +43,7 @@ public class ApplicationManager {
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
-        contactHelper = new ContactHelper(wd);
+        contactHelper = new ContactHelper(wd, this);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
     }
