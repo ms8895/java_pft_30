@@ -41,9 +41,9 @@ public class ApplicationManager {
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         js = (JavascriptExecutor) wd;
         wd.get("http://localhost/addressbook/");
-        groupHelper = new GroupHelper(wd);
+        groupHelper = new GroupHelper(wd, this);    //Изменен метод createGroupAndContact()
         navigationHelper = new NavigationHelper(wd);
-        contactHelper = new ContactHelper(wd, this);
+        contactHelper = new ContactHelper(wd/*, this*/);    //Изменен метод createGroupAndContact()
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
     }
