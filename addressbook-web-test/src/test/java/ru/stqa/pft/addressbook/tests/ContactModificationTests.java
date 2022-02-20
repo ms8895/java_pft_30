@@ -15,7 +15,6 @@ public class ContactModificationTests extends TestBase {
             app.getContactHelper().createGroupAndContact();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().initContactModification();
         app.getContactHelper().fillContactFormIsGroup(new ContactData("Фрай", "Джей", null,
