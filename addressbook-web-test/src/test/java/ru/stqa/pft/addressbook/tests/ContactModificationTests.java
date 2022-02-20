@@ -13,6 +13,7 @@ public class ContactModificationTests extends TestBase {
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createGroupAndContact();
         }
+        app.getContactHelper().selectContact(before - 1);
         app.getContactHelper().initContactModification();
         app.getContactHelper().fillContactFormIsGroup(new ContactData("Фрай", "Джей", null,
                 "+78887774433", "testFR@mail.com", null), false);
