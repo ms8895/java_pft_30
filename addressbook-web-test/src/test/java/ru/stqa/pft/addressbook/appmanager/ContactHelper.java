@@ -88,4 +88,8 @@ public class ContactHelper extends HelperBase {
         app.getContactHelper().createContact(new ContactData("Ostap", "Bender",
                 "221B Baker Street", null, "testTest@mail.ru", "Test1"));
     }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }

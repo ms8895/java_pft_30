@@ -38,7 +38,7 @@ public class ApplicationManager {
             wd = new OperaDriver();
         }
 
-        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         js = (JavascriptExecutor) wd;
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
