@@ -2,12 +2,18 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-public class GroupHelper extends HelperBase {
+import java.util.ArrayList;
+import java.util.List;
 
-    public GroupHelper(WebDriver wd) {
+public class GroupHelper extends HelperBase {
+    private ApplicationManager app; //Изменен метод createGroupAndContact()
+
+    public GroupHelper(WebDriver wd, ApplicationManager app) {  //Изменен метод createGroupAndContact()
         super(wd);
+        this.app = app; //Изменен метод createGroupAndContact()
     }
 
     public void returnGroupPage() {
@@ -32,8 +38,8 @@ public class GroupHelper extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void selectGroup() {
-        click(By.name("selected[]"));
+    public void selectGroup(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void initGroupModification() {
@@ -42,5 +48,43 @@ public class GroupHelper extends HelperBase {
 
     public void submitGroupModification() {
         click(By.name("update"));
+    }
+
+    public void createGroup(GroupData group) {
+        initGroupCreation();
+        fillGroupForm(group);
+        submitGroupCreation();
+        returnGroupPage();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public boolean isGroupPresent(String groupname) {
+        return isElementPresent(By.xpath("//input[@title='Select (" + groupname + ")']"));
+    }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<GroupData> getGroupList() {
+        List<GroupData> groups = new ArrayList<GroupData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element : elements) {
+            String name = element.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            GroupData group = new GroupData(id, name, null, null);
+            groups.add(group);
+        }
+        return groups;
+    }
+
+    public void createNewGroup() {  //Изменен метод createGroupAndContact()
+        app.getNavigationHelper().gotoGroupPage();
+        if (!app.getGroupHelper().isGroupPresent("Test1")) {
+            app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test"));
+        }
     }
 }
