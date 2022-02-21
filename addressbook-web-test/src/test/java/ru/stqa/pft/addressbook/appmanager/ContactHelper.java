@@ -50,6 +50,13 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//img[@alt='Edit']"));
     }
 
+    public void initLastContactModification() {
+        List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
+        List<WebElement> cells = elements.get(elements.size() - 1).findElements(By.tagName("td"));
+        cells.get(7).click();
+    }
+
+
     public void submitContactModification() {
         click(By.xpath("//input[22]"));
     }
@@ -102,14 +109,18 @@ public class ContactHelper extends HelperBase {
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
+
         for (WebElement element : elements) {
-            String firstname = element.getText();
-            //String firstname = element.findElement(By.cssSelector("td[3]")).getText();
-            String lastname = element.getText();
-            //String lastname = element.findElement(By.tagName("td[2]]")).getText();
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            String lastname = cells.get(1).getText();
+            String firstname = cells.get(2).getText();
+            String address = cells.get(3).getText();
+            String mobile = cells.get(5).getText();
+            String email = cells.get(4).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null);
+            ContactData contact = new ContactData(id, firstname, lastname, address, mobile, email, null);
             contacts.add(contact);
+
         }
         return contacts;
     }

@@ -16,15 +16,15 @@ public class ContactCreationTest extends TestBase {
         app.getGroupHelper().createNewGroup();
         app.getNavigationHelper().gotoContactPage();
         ContactData contact = new ContactData("Test", "Bender",
-                "221B Baker Street", null, "testTest@mail.ru", "Test1");
+                "221B Baker Street", "+789456321", "testTest@mail.ru", "Test1");
         app.getContactHelper().createContact(contact);
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() + 1);
 
         before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
+        Comparator<? super ContactData> byFirstname = (c1, c2) -> CharSequence.compare(c1.getFirstname(), c2.getFirstname());
+        before.sort(byFirstname);
+        after.sort(byFirstname);
         Assert.assertEquals(before, after);
     }
 }
