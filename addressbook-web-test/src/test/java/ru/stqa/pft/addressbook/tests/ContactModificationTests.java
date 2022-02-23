@@ -9,11 +9,11 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-    @Test
+    @Test(enabled = true)
     public void testContactModification() {
-        app.getNavigationHelper().gotoHomePage();
+        app.goTo().gotoHomePage();
         if (!app.getContactHelper().isThereAContact()) {
-            app.getGroupHelper().createNewGroup();
+            app.group().createNewGroup();
             app.getContactHelper().createContact(new ContactData("Ostap", "Bender",
                     "221B Baker Street", null, "testTest@mail.ru", "Test1"));
         }

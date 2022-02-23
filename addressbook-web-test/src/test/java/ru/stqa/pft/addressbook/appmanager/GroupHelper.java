@@ -50,18 +50,23 @@ public class GroupHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void createGroup(GroupData group) {
+    public void create(GroupData group) {
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
         returnGroupPage();
     }
 
-    public void modifyGroup(int index, GroupData group) {
+    public void modify(int index, GroupData group) {
         selectGroup(index);
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
+        returnGroupPage();
+    }
+    public void delete(int index) {
+        selectGroup(index);
+        deleteSelectedGroup();
         returnGroupPage();
     }
 
@@ -77,7 +82,7 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> getGroupList() {
+    public List<GroupData> list() {
         List<GroupData> groups = new ArrayList<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
@@ -90,9 +95,9 @@ public class GroupHelper extends HelperBase {
     }
 
     public void createNewGroup() {  //Изменен метод createGroupAndContact()
-        app.getNavigationHelper().gotoGroupPage();
-        if (!app.getGroupHelper().isGroupPresent("Test1")) {
-            app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test"));
+        app.goTo().groupPage();
+        if (!app.group().isGroupPresent("Test1")) {
+            app.group().create(new GroupData("Test1", "Test2", "Test"));
         }
     }
 }
