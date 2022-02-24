@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ public class ContactDeletionTest extends TestBase {
     public void testContactDeletion() {
         app.goTo().gotoHomePage();
         if (!app.getContactHelper().isThereAContact()) {
-            app.group().createNewGroup();
+            app.group().isGroupHere();
+            app.group().create(new GroupData().withName("Test1").withHeader("Test2").withFooter("Test"));
             app.getContactHelper().createContact(new ContactData("Ostap", "Bender",
                     "221B Baker Street", null, "testTest@mail.ru", "Test1"));
         }

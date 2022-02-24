@@ -13,7 +13,7 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() {
         app.goTo().gotoHomePage();
         if (!app.getContactHelper().isThereAContact()) {
-            app.group().createNewGroup();
+            app.group().isGroupHere();
             app.getContactHelper().createContact(new ContactData("Ostap", "Bender",
                     "221B Baker Street", null, "testTest@mail.ru", "Test1"));
         }

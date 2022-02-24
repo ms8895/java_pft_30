@@ -88,16 +88,14 @@ public class GroupHelper extends HelperBase {
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, name, null, null);
-            groups.add(group);
+            groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
     }
 
-    public void createNewGroup() {  //Изменен метод createGroupAndContact()
+    public void isGroupHere() {  //Изменен метод createGroupAndContact()
         app.goTo().groupPage();
         if (!app.group().isGroupPresent("Test1")) {
-            app.group().create(new GroupData("Test1", "Test2", "Test"));
         }
     }
 }
