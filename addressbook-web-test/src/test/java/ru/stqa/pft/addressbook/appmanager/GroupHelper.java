@@ -64,6 +64,7 @@ public class GroupHelper extends HelperBase {
         submitGroupModification();
         returnGroupPage();
     }
+
     public void delete(int index) {
         selectGroup(index);
         deleteSelectedGroup();
@@ -93,9 +94,10 @@ public class GroupHelper extends HelperBase {
         return groups;
     }
 
-    public void isGroupHere() {  //Изменен метод createGroupAndContact()
+    public void createGroupIfNotExist(GroupData groupData) {  //Изменен метод createGroupAndContact()
         app.goTo().groupPage();
-        if (!app.group().isGroupPresent("Test1")) {
+        if (!app.group().isGroupPresent(groupData.getName())) {
+            app.group().create(groupData);
         }
     }
 }

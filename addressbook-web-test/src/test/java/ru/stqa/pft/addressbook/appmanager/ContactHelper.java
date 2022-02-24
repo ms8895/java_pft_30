@@ -6,18 +6,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
+    private ApplicationManager app;
 
     //private ApplicationManager app;        //Изменен на createNewGroup()
 
-    public ContactHelper(WebDriver wd/*, ApplicationManager app*/) {        //Изменен на createNewGroup()
-
+    public ContactHelper(WebDriver wd, ApplicationManager app) {        //Изменен на createNewGroup()
         super(wd);
-        //this.app = app;       //Изменен на createNewGroup()
+        this.app = app;       //Изменен на createNewGroup()
     }
 
     public void returnContactHomePage() {
@@ -69,6 +70,13 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
+    public void createIfNotExist(ContactData contactData){
+        if (!app.getContactHelper().isThereAContact()) {
+            app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroup()).withHeader("Test2").withFooter("Test"));
+            app.goTo().gotoContactPage();
+            app.getContactHelper().createContact(contactData);
+        }
+    }
     public void createContact(ContactData contact) {
         initContactCreation();
         fillContactForm(contact);
