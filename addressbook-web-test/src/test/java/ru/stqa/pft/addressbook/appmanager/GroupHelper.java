@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupHelper extends HelperBase {
-    private ApplicationManager app; //Изменен метод createGroupAndContact()
+    private ApplicationManager app;
 
-    public GroupHelper(WebDriver wd, ApplicationManager app) {  //Изменен метод createGroupAndContact()
+    public GroupHelper(WebDriver wd, ApplicationManager app) {
         super(wd);
-        this.app = app; //Изменен метод createGroupAndContact()
+        this.app = app;
     }
 
     public void returnGroupPage() {
@@ -94,10 +94,17 @@ public class GroupHelper extends HelperBase {
         return groups;
     }
 
-    public void createGroupIfNotExist(GroupData groupData) {  //Изменен метод createGroupAndContact()
+    public void createGroupIfNotExist(GroupData groupData) {
         app.goTo().groupPage();
         if (!app.group().isGroupPresent(groupData.getName())) {
             app.group().create(groupData);
+        }
+    }
+    public void chooseGroup(GroupData groupData) {
+        app.goTo().groupPage();
+        if (!app.group().isGroupPresent(groupData.getName())) {
+            GroupData group = groupData.withName("Test1");
+            app.group().click(By.name("new_group"));
         }
     }
 }

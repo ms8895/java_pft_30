@@ -14,7 +14,7 @@ public class ContactCreationTest extends TestBase {
     public void testContactCreation() throws Exception {
         app.goTo().gotoHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
-        GroupData group = new GroupData().withName("Test1");
+        GroupData group = new GroupData().withName("Test");
         ContactData contact = new ContactData("Test", "Bender",
                 "221B Baker Street", "+789456321", "testTest@mail.ru", group.getName());
         app.group().createGroupIfNotExist(group);

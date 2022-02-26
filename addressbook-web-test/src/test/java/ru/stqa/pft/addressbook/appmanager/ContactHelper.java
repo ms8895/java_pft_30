@@ -14,11 +14,9 @@ import java.util.List;
 public class ContactHelper extends HelperBase {
     private ApplicationManager app;
 
-    //private ApplicationManager app;        //Изменен на createNewGroup()
-
-    public ContactHelper(WebDriver wd, ApplicationManager app) {        //Изменен на createNewGroup()
+    public ContactHelper(WebDriver wd, ApplicationManager app) {
         super(wd);
-        this.app = app;       //Изменен на createNewGroup()
+        this.app = app;
     }
 
     public void returnContactHomePage() {
@@ -70,19 +68,19 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void createIfNotExist(ContactData contactData){
+    public void createContactIfNotExist(ContactData contactData) {
         if (!app.getContactHelper().isThereAContact()) {
             app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroup()).withHeader("Test2").withFooter("Test"));
             app.goTo().gotoContactPage();
             app.getContactHelper().createContact(contactData);
         }
     }
+
     public void createContact(ContactData contact) {
         initContactCreation();
         fillContactForm(contact);
         submitContactCreation();
         returnContactHomePage();
-
     }
 
     public void fillContactForm(ContactData contactData) {
@@ -91,24 +89,15 @@ public class ContactHelper extends HelperBase {
         type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("email"), contactData.getEmail());
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     }
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
-
-    //Изменен на createNewGroup()
-
-    /*public void createGroupAndContact() {
-        app.getNavigationHelper().gotoGroupPage();
-        if (!app.getGroupHelper().isGroupPresent("Test1")) {
-            app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test"));
-        }
-        app.getNavigationHelper().gotoContactPage();
-        ContactData newContact = new ContactData("Ostap", "Bender",
-                "221B Baker Street", null, "testTest@mail.ru", "Test1");
-        app.getContactHelper().createContact(newContact);
-    }*/
+    public int isThereGroup() {
+        return wd.findElements(By.name("new_group")).size();
+    }
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
