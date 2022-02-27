@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -27,14 +26,10 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactFormIsGroup(ContactData contactData, boolean creation) {
+    public void fillContactFormIsGroup(ContactData contactData) {
         fillContactForm(contactData);
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
 
-        if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
     }
 
     public void initContactCreation() {
@@ -79,6 +74,7 @@ public class ContactHelper extends HelperBase {
     public void createContact(ContactData contact) {
         initContactCreation();
         fillContactForm(contact);
+        selectGroup(contact);
         submitContactCreation();
         returnContactHomePage();
     }
@@ -89,12 +85,24 @@ public class ContactHelper extends HelperBase {
         type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("email"), contactData.getEmail());
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+
+    }
+
+    public void selectGroup(ContactData contactData) {
+        List<WebElement> elements = wd.findElement(By.name("new_group")).findElements(By.tagName("option"));
+        for (WebElement element : elements) {
+            String group = element.getText();
+            if (group.equals(contactData.getGroup())) {
+                element.click();
+                return;
+            }
+        }
     }
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
+
     public int isThereGroup() {
         return wd.findElements(By.name("new_group")).size();
     }
