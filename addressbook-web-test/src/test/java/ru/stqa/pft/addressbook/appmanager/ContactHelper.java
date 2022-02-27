@@ -50,7 +50,6 @@ public class ContactHelper extends HelperBase {
         cells.get(7).click();
     }
 
-
     public void submitContactModification() {
         click(By.xpath("//input[22]"));
     }
@@ -64,14 +63,14 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createContactIfNotExist(ContactData contactData) {
-        if (!app.getContactHelper().isThereAContact()) {
+        if (app.сontact().list().size() == 0) {
             app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroup()).withHeader("Test2").withFooter("Test"));
-            app.goTo().gotoContactPage();
-            app.getContactHelper().createContact(contactData);
+            app.goTo().contactPage();
+            app.сontact().create(contactData);
         }
     }
 
-    public void createContact(ContactData contact) {
+    public void create(ContactData contact) {
         initContactCreation();
         fillContactForm(contact);
         selectGroup(contact);
@@ -98,12 +97,24 @@ public class ContactHelper extends HelperBase {
             }
         }
     }
-    public void modifyContact(int index, ContactData contact) {
+
+    public void modify(int index, ContactData contact) {
         selectContact(index);
         initLastContactModification();
         fillContactFormIsGroup(contact);
         submitContactModification();
         returnContactHomePage();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContact();
+        AcceptAlertContact();
+    }
+    public void createGroupAndContact(GroupData group, ContactData contact) {
+        app.group().createGroupIfNotExist(group);
+        app.goTo().contactPage();
+        app.сontact().create(contact);
     }
 
     public boolean isThereAContact() {
@@ -118,7 +129,7 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
 
