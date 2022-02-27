@@ -7,7 +7,6 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,19 +37,16 @@ public class ContactHelper extends HelperBase {
         click(By.name("firstname"));
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
-    }
-
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
-    public void initContactModification() {
-        click(By.xpath("//img[@alt='Edit']"));
+    public void initContactModification(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+        /*<a href="edit.php?id=133"><img src="icons/pencil.png" title="Edit" alt="Edit"></a>*/
     }
 
-    public void initLastContactModification() {
+    public void initLastContactModification() {// Выбор последнего контакта для редактирования
         List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
         List<WebElement> cells = elements.get(elements.size() - 1).findElements(By.tagName("td"));
         cells.get(7).click();
@@ -69,7 +65,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createContactIfNotExist(ContactData contactData) {
-        if (app.сontact().list().size() == 0) {
+        if (app.сontact().all().size() == 0) {
             app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroup()).withHeader("Test2").withFooter("Test"));
             app.goTo().contactPage();
             app.сontact().create(contactData);
@@ -104,18 +100,12 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void modify(int index, ContactData contact) {
-        selectContact(index);
-        initLastContactModification();
+    public void modify(ContactData contact) {
+        selectContactById(contact.getId());
+        initContactModification(contact.getId());
         fillContactFormIsGroup(contact);
         submitContactModification();
         returnContactHomePage();
-    }
-
-    public void delete(int index) {
-        selectContact(index);
-        deleteSelectedContact();
-        AcceptAlertContact();
     }
 
     public void delete(ContactData contact) {
@@ -140,24 +130,6 @@ public class ContactHelper extends HelperBase {
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
-    }
-
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
-
-        for (WebElement element : elements) {
-            List<WebElement> cells = element.findElements(By.tagName("td"));
-            String lastname = cells.get(1).getText();
-            String firstname = cells.get(2).getText();
-            String address = cells.get(3).getText();
-            String mobile = cells.get(5).getText();
-            String email = cells.get(4).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-                    .withAddress(address).withMobile(mobile).withEmail(email));
-        }
-        return contacts;
     }
 
     public Set<ContactData> all() {
