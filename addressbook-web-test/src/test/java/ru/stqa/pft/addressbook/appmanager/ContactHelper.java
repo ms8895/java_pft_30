@@ -8,9 +8,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
     private ApplicationManager app;
@@ -78,6 +76,7 @@ public class ContactHelper extends HelperBase {
         fillContactForm(contact);
         selectGroup(contact);
         submitContactCreation();
+        contactCache = null;
         returnContactHomePage();
     }
 
@@ -106,12 +105,14 @@ public class ContactHelper extends HelperBase {
         initContactModification(contact.getId());
         fillContactFormIsGroup(contact);
         submitContactModification();
+        contactCache = null;
         returnContactHomePage();
     }
 
     public void delete(ContactData contact) {
         selectContactById(contact.getId());
         deleteSelectedContact();
+        contactCache = null;
         AcceptAlertContact();
     }
 
@@ -133,8 +134,13 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    private Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
 
         for (WebElement element : elements) {
@@ -145,9 +151,9 @@ public class ContactHelper extends HelperBase {
             String mobile = cells.get(5).getText();
             String email = cells.get(4).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
                     .withAddress(address).withMobile(mobile).withEmail(email));
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 }
