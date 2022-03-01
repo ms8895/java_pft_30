@@ -15,7 +15,7 @@ public class ContactCreationTest extends TestBase {
         app.goTo().homePage();
         Contacts before = app.сontact().all();
         GroupData group = new GroupData().withName("Test2");
-        ContactData contact = new ContactData().withFirstname("Ostap").withLastname("Bender").withAddress("221B Baker Street").withMobile("+789456321").withEmail("testTest@mail.ru").withGroup(group.getName());
+        ContactData contact = new ContactData().withFirstname("Ostap").withLastname("Bender").withAddress("221B Baker Street").withMobilePhone("+789456321").withEmail("testTest@mail.ru").withGroup(group.getName());
         app.сontact().createGroupAndContact(group, contact);
         assertThat(app.сontact().count(), equalTo(before.size() + 1));
         Contacts after = app.сontact().all();
