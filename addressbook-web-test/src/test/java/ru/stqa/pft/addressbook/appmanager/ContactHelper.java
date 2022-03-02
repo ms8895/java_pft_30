@@ -150,6 +150,27 @@ public class ContactHelper extends HelperBase {
             String lastname = cells.get(1).getText();
             String firstname = cells.get(2).getText();
             String address = cells.get(3).getText();
+            String allPhones = cells.get(5).getText();
+            String email = cells.get(4).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+                    .withAddress(address).withAllPhones(allPhones).withEmail(email));
+        }
+        return new Contacts(contactCache);
+    }
+    /* Разрезает строку с номерами телефона на три части, если в поле 3 номера
+    public Contacts all() {
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
+        List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
+
+        for (WebElement element : elements) {
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            String lastname = cells.get(1).getText();
+            String firstname = cells.get(2).getText();
+            String address = cells.get(3).getText();
             String[] phones = cells.get(5).getText().split("\n");
             String email = cells.get(4).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
@@ -157,7 +178,7 @@ public class ContactHelper extends HelperBase {
                     .withAddress(address).withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]).withEmail(email));
         }
         return new Contacts(contactCache);
-    }
+    }*/
 
     public ContactData InfoFromEditForm(ContactData contact) {
         newInitContactModificationById(contact.getId());
