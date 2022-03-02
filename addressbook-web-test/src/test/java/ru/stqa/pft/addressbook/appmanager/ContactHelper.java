@@ -84,7 +84,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("address"), contactData.getAddress());
+        type(By.name("home"), contactData.getHomePhone());
         type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
         type(By.name("email"), contactData.getEmail());
 
     }
@@ -148,11 +150,11 @@ public class ContactHelper extends HelperBase {
             String lastname = cells.get(1).getText();
             String firstname = cells.get(2).getText();
             String address = cells.get(3).getText();
-            String mobile = cells.get(5).getText();
+            String[] phones = cells.get(5).getText().split("\n");
             String email = cells.get(4).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
             contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-                    .withAddress(address).withMobilePhone(mobile).withEmail(email));
+                    .withAddress(address).withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]).withEmail(email));
         }
         return new Contacts(contactCache);
     }
@@ -164,18 +166,19 @@ public class ContactHelper extends HelperBase {
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
-wd.navigate().back();
-return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-        .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+        wd.navigate().back();
+        return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
     }
 
     // Выбор контакта Лекция 5.9. Способы построения сложных локаторов
+    // Метод для выбора кнопки редактировать контакт
     public void newInitContactModificationById(int id) {
         WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
-// Выбор контакта сложные локаторы
+// Выбор кнопки редактировать контакта, сложные локаторы
         //wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
         //wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
         //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
