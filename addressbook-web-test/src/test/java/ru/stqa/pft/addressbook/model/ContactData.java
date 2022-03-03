@@ -14,6 +14,7 @@ public class ContactData {
     private String email;
     private String email2;
     private String email3;
+    private String allEmails;
     private String group;
 
     public int getId() {
@@ -58,6 +59,10 @@ public class ContactData {
 
     public String getEmail3() {
         return email3;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
     }
 
     public String getGroup() {
@@ -120,6 +125,11 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
     public ContactData withGroup(String group) {
         this.group = group;
         return this;
@@ -142,7 +152,9 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(address, that.address) && Objects.equals(mobilePhone, that.mobilePhone) && Objects.equals(email, that.email);
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname)
+                && Objects.equals(address, that.address) && Objects.equals(mobilePhone, that.mobilePhone)
+                && Objects.equals(email, that.email);
     }
 
     @Override
