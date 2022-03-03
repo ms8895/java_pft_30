@@ -15,7 +15,8 @@ public class ContactPhoneTests extends TestBase {
     public void ensurePrecondition() {
         app.goTo().homePage();
         app.сontact().createContactIfNotExist(new ContactData().withFirstname("Ostap").withLastname("Bender")
-                .withAddress("221B Baker Street").withHomePhone("1 11").withMobilePhone("-222").withWorkPhone("3(33)").withEmail("testTest@mail.ru").withGroup("Test1"));
+                .withAddress("221B Baker Street").withHomePhone("1 11").withMobilePhone("-222").withWorkPhone("3(33)")
+                .withEmail("testTest@mail.ru").withGroup("Test1"));
     }
 
     @Test
@@ -29,12 +30,12 @@ public class ContactPhoneTests extends TestBase {
 
     private String mergePhones(ContactData contact) {
         return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
-            .stream().filter((s)->!s.equals(""))
+                .stream().filter((s) -> !s.equals(""))
                 .map(ContactPhoneTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 
-    public static String cleaned (String phone){
-            return phone.replaceAll("\\s","").replaceAll("[-()]","");
+    public static String cleaned(String phone) {
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
 }
