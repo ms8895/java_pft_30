@@ -65,7 +65,8 @@ public class ContactHelper extends HelperBase {
 
     public void createContactIfNotExist(ContactData contactData) {
         if (app.сontact().all().size() == 0) {
-            app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroup()).withHeader("Test2").withFooter("Test"));
+            app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroup())
+                    .withHeader("Test2").withFooter("Test"));
             app.goTo().contactPage();
             app.сontact().create(contactData);
         }
@@ -198,16 +199,18 @@ public class ContactHelper extends HelperBase {
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withEmail(email).withEmail2(email2).withEmail3(email3).withPhone2(phone2);
+                .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withPhone2(phone2)
+                .withEmail(email).withEmail2(email2).withEmail3(email3);
     }
 
     // Выбор контакта Лекция 5.9. Способы построения сложных локаторов
     // Метод для выбора кнопки редактировать контакт
     public void newInitContactModificationById(int id) {
-        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+        /*WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
-        cells.get(7).findElement(By.tagName("a")).click();
+        cells.get(7).findElement(By.tagName("a")).click();*/
 /*Выбор кнопки редактировать контакта, сложные локаторы
         wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
         wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
