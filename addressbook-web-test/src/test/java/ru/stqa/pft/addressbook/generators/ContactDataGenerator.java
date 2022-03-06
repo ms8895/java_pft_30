@@ -36,10 +36,11 @@ public class ContactDataGenerator {
     }
 
     private void save(List<ContactData> contacts, File file) throws IOException {
-        System.out.println(new File(".").getAbsolutePath());
+        //System.out.println(new File(".").getAbsolutePath());
         Writer writer = new FileWriter(file);
         for (ContactData contact : contacts) {
-            writer.write(String.format("%s;%s;%s\n", contact.getFirstname(), contact.getLastname(), contact.getAddress()));
+            writer.write(String.format("%s;%s;%s;Test1;./src/test/resources/bu.jpg/\n", contact.getFirstname(),
+                    contact.getLastname(), contact.getAddress(), contact.getGroup(), contact.getPhoto()));
         }
         writer.close();
     }
