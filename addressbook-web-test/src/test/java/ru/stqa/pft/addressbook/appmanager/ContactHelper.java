@@ -66,7 +66,7 @@ public class ContactHelper extends HelperBase {
     public void createContactIfNotExist(ContactData contactData) {
         if (app.сontact().all().size() == 0) {
             app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroup())
-                    .withHeader("Test2").withFooter("Test"));
+                    .withHeader("Test2").withFooter("Test3"));
             app.goTo().contactPage();
             app.сontact().create(contactData);
         }

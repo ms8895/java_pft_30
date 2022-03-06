@@ -10,4 +10,5 @@ dependencies {
     implementation "org.slf4j:slf4j-simple:1.7.33"
     implementation 'it.ozimov:hamcrest:2.0.0'
     implementation 'com.beust:jcommander:1.82'
+    implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.8'
 }
