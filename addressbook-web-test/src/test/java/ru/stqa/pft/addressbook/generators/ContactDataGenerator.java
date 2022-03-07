@@ -78,7 +78,7 @@ public class ContactDataGenerator {
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
-            File photo = new File("./src/test/resources/bu.jpg/");// Для xml
+            File photo = new File("./src/test/resources/contact.jpg/");// Для xml
             contacts.add(new ContactData().withFirstname(String.format("firstname %s", i))
                     .withLastname(String.format("lastname %s", i)).withAddress(String.format("address %s", i))
                     .withGroup(String.format("Test1")).withPhoto(photo));
