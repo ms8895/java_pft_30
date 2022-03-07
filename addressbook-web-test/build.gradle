@@ -11,4 +11,5 @@ dependencies {
     implementation 'it.ozimov:hamcrest:2.0.0'
     implementation 'com.beust:jcommander:1.82'
     implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.8'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.6.1'
 }
