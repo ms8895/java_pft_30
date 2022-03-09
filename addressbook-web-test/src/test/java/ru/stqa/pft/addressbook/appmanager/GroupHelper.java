@@ -4,16 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GroupHelper extends HelperBase {
-    private ApplicationManager app; //Изменен метод createGroupAndContact()
+    private ApplicationManager app;
 
-    public GroupHelper(WebDriver wd, ApplicationManager app) {  //Изменен метод createGroupAndContact()
+    public GroupHelper(WebDriver wd, ApplicationManager app) {
         super(wd);
-        this.app = app; //Изменен метод createGroupAndContact()
+        this.app = app;
     }
 
     public void returnGroupPage() {
@@ -38,8 +38,8 @@ public class GroupHelper extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void selectGroup(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void initGroupModification() {
@@ -50,10 +50,27 @@ public class GroupHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void createGroup(GroupData group) {
+    public void create(GroupData group) {
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
+        groupCache = null;
+        returnGroupPage();
+    }
+
+    public void modify(GroupData group) {
+        selectGroupById(group.getId());
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        groupCache = null;
+        returnGroupPage();
+    }
+
+    public void delete(GroupData group) {
+        selectGroupById(group.getId());
+        deleteSelectedGroup();
+        groupCache = null;
         returnGroupPage();
     }
 
@@ -61,30 +78,34 @@ public class GroupHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
     public boolean isGroupPresent(String groupname) {
         return isElementPresent(By.xpath("//input[@title='Select (" + groupname + ")']"));
     }
 
-    public int getGroupCount() {
-        return wd.findElements(By.name("selected[]")).size();
-    }
+    private Groups groupCache = null;
 
-    public List<GroupData> getGroupList() {
-        List<GroupData> groups = new ArrayList<GroupData>();
+    public Groups all() {
+        if (groupCache != null) {
+            return new Groups(groupCache);
+        }
+        groupCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, name, null, null);
-            groups.add(group);
+            groupCache.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        return new Groups(groupCache);
     }
 
-    public void createNewGroup() {  //Изменен метод createGroupAndContact()
-        app.getNavigationHelper().gotoGroupPage();
-        if (!app.getGroupHelper().isGroupPresent("Test1")) {
-            app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test"));
+    public void createGroupIfNotExist(GroupData groupData) {
+        app.goTo().groupPage();
+        if (!app.group().isGroupPresent(groupData.getName())) {
+            app.group().create(groupData);
         }
     }
 }

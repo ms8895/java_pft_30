@@ -1,0 +1,20 @@
+<list>
+  <contact>
+    <firstname>firstname 0</firstname>
+    <lastname>lastname 0</lastname>
+    <address>address 0</address>
+    <photo>.\src\test\resources\contact.jpg</photo>
+  </contact>
+  <contact>
+    <firstname>firstname 1</firstname>
+    <lastname>lastname 1</lastname>
+    <address>address 1</address>
+    <photo>.\src\test\resources\contact.jpg</photo>
+  </contact>
+  <contact>
+    <firstname>firstname 2</firstname>
+    <lastname>lastname 2</lastname>
+    <address>address 2</address>
+    <photo>.\src\test\resources\contact.jpg</photo>
+  </contact>
+</list>

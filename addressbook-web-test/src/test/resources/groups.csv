@@ -1,0 +1,20 @@
+<list>
+  <ru.stqa.pft.addressbook.model.GroupData>
+    <id>2147483647</id>
+    <name>test 0</name>
+    <header>header 0</header>
+    <footer>footer 0</footer>
+  </ru.stqa.pft.addressbook.model.GroupData>
+  <ru.stqa.pft.addressbook.model.GroupData>
+    <id>2147483647</id>
+    <name>test 1</name>
+    <header>header 1</header>
+    <footer>footer 1</footer>
+  </ru.stqa.pft.addressbook.model.GroupData>
+  <ru.stqa.pft.addressbook.model.GroupData>
+    <id>2147483647</id>
+    <name>test 2</name>
+    <header>header 2</header>
+    <footer>footer 2</footer>
+  </ru.stqa.pft.addressbook.model.GroupData>
+</list>
