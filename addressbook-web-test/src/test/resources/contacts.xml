@@ -1,20 +1,23 @@
 <list>
   <contact>
-    <firstname>firstname 0</firstname>
-    <lastname>lastname 0</lastname>
-    <address>address 0</address>
+    <firstname>Fill 0</firstname>
+    <lastname>Bender 0</lastname>
+    <address>street 0</address>
+    <group>Test1</group>
     <photo>.\src\test\resources\contact.jpg</photo>
   </contact>
   <contact>
-    <firstname>firstname 1</firstname>
-    <lastname>lastname 1</lastname>
-    <address>address 1</address>
+    <firstname>Fill 1</firstname>
+    <lastname>Bender 1</lastname>
+    <address>street 1</address>
+    <group>Test1</group>
     <photo>.\src\test\resources\contact.jpg</photo>
   </contact>
   <contact>
-    <firstname>firstname 2</firstname>
-    <lastname>lastname 2</lastname>
-    <address>address 2</address>
+    <firstname>Fill 2</firstname>
+    <lastname>Bender 2</lastname>
+    <address>street 2</address>
+    <group>Test1</group>
     <photo>.\src\test\resources\contact.jpg</photo>
   </contact>
 </list>

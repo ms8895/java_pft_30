@@ -69,8 +69,9 @@ public class ContactDataGenerator {
         //System.out.println(new File(".").getAbsolutePath());
         try (Writer writer = new FileWriter(file)) {
             for (ContactData contact : contacts) {
-                writer.write(String.format("%s;%s;%s;%s\n", contact.getFirstname(),
-                        contact.getLastname(), contact.getAddress(), contact.getPhoto().getAbsolutePath()));
+                writer.write(String.format("%s;%s;%s;%s;%s\n", contact.getFirstname(),
+                        contact.getLastname(), contact.getAddress(), contact.getGroup(),
+                        contact.getPhoto().getAbsolutePath()));
             }
         }
     }
@@ -79,9 +80,9 @@ public class ContactDataGenerator {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
             File photo = new File("./src/test/resources/contact.jpg/");// Для xml
-            contacts.add(new ContactData().withFirstname(String.format("firstname %s", i))
-                    .withLastname(String.format("lastname %s", i)).withAddress(String.format("address %s", i))
-                    .withPhoto(photo));
+            contacts.add(new ContactData().withFirstname(String.format("Fill %s", i))
+                    .withLastname(String.format("Bender %s", i)).withAddress(String.format("street %s", i))
+                    .withGroup(String.format("Test1")).withPhoto(photo));
         }
         return contacts;
     }
