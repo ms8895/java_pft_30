@@ -16,7 +16,7 @@ public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
 
     protected static final ApplicationManager app = new ApplicationManager
-            (System.getProperty("browser", BrowserType.CHROME));
+            (System.getProperty("browser", BrowserType.OPERA));
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {
