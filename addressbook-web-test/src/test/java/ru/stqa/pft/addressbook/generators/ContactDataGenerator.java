@@ -70,19 +70,20 @@ public class ContactDataGenerator {
         try (Writer writer = new FileWriter(file)) {
             for (ContactData contact : contacts) {
                 writer.write(String.format("%s;%s;%s;%s;%s\n", contact.getFirstname(),
-                        contact.getLastname(), contact.getAddress(), contact.getGroup(),
-                        contact.getPhoto().getAbsolutePath()));
+                        contact.getLastname(),contact.getPhoto().getAbsolutePath(), contact.getAddress(),
+                        contact.getMobilePhone(),contact.getEmail(), contact.getGroup()));
             }
         }
     }
-
+/*-c 1 -f src/test/resources/contacts.xml -d xml*/
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
             File photo = new File("./src/test/resources/contact.jpg/");// Для xml
             contacts.add(new ContactData().withFirstname(String.format("Fill %s", i))
-                    .withLastname(String.format("Bender %s", i)).withAddress(String.format("street %s", i))
-                    .withGroup(String.format("Test1")).withPhoto(photo));
+                    .withLastname(String.format("Bender %s", i)).withPhoto(photo).withAddress(String.format("street %s", i))
+                    .withMobilePhone(String.format("+895566423")).withEmail(String.format("Test1@lki.com"))
+                    .withGroup(String.format("Test1")));
         }
         return contacts;
     }

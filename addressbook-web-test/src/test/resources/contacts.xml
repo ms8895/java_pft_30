@@ -3,20 +3,8 @@
     <firstname>Fill 0</firstname>
     <lastname>Bender 0</lastname>
     <address>street 0</address>
-    <group>Test1</group>
-    <photo>.\src\test\resources\contact.jpg</photo>
-  </contact>
-  <contact>
-    <firstname>Fill 1</firstname>
-    <lastname>Bender 1</lastname>
-    <address>street 1</address>
-    <group>Test1</group>
-    <photo>.\src\test\resources\contact.jpg</photo>
-  </contact>
-  <contact>
-    <firstname>Fill 2</firstname>
-    <lastname>Bender 2</lastname>
-    <address>street 2</address>
+    <mobilePhone>+895566423</mobilePhone>
+    <email>Test1@lki.com</email>
     <group>Test1</group>
     <photo>.\src\test\resources\contact.jpg</photo>
   </contact>

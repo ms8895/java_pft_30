@@ -56,11 +56,12 @@ public class ContactCreationTest extends TestBase {
     @Test(dataProvider = "validContactsFromXml")
     public void testContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
-        Contacts before = app.сontact().all();
+        Contacts before = app.db().contacts();
+        System.out.println("КОЛИЧЕСТВО КОНТАКТОВ ДО " + before.size());
         GroupData group = new GroupData().withName(contact.getGroup());
         app.сontact().createGroupAndContact(group, contact);
         assertThat(app.сontact().count(), equalTo(before.size() + 1));
-        Contacts after = app.сontact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.withAdded(contact
                 .withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
