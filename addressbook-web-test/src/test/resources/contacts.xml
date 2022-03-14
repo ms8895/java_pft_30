@@ -3,8 +3,12 @@
     <firstname>Fill 0</firstname>
     <lastname>Bender 0</lastname>
     <address>street 0</address>
-    <mobilePhone>+895566423</mobilePhone>
-    <email>Test1@lki.com</email>
+    <homePhone>+895566420</homePhone>
+    <mobilePhone>+095566423</mobilePhone>
+    <workPhone>+895566420</workPhone>
+    <email>Email1@lki.com</email>
+    <email2>email21@lki.com</email2>
+    <email3>EMAIL0@lki.com</email3>
     <group>Test1</group>
     <photo>.\src\test\resources\contact.jpg</photo>
   </contact>

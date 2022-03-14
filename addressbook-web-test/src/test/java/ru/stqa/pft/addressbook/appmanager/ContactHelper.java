@@ -69,10 +69,7 @@ public class ContactHelper extends HelperBase {
                     .withHeader("Test2").withFooter("Test3"));
             app.goTo().contactPage();
             app.сontact().create(contactData);
-
         }
-        /*if (app.сontact().all().size() == 0) {
-        }*/
     }
 
     public void create(ContactData contact) {
@@ -96,7 +93,6 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
         attach(By.name("photo"), contactData.getPhoto());
-
     }
 
     public void selectGroup(ContactData contactData) {
@@ -167,8 +163,8 @@ public class ContactHelper extends HelperBase {
         return new Contacts(contactCache);
     }
 
-    /* Разрезает строку с номерами телефона и эл.почты на три части, если в поле 3 строки
-    public Contacts all() {
+    /* Разрезает строку с номерами телефона и эл.почты на три части, если в поле 3 строки*/
+    public Contacts allSplit() {
         if (contactCache != null) {
             return new Contacts(contactCache);
         }
@@ -184,11 +180,11 @@ public class ContactHelper extends HelperBase {
             String[] emails = cells.get(4).getText().split("\n");
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
             contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-                    .withAddress(address)./*withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2])
+                    .withAddress(address).withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2])
                     .withEmail(emails[0]).withEmail2(emails[1]).withEmail3(emails[2]));
         }
         return new Contacts(contactCache);
-    }*/
+    }
 
     public ContactData InfoFromEditForm(ContactData contact) {
         newInitContactModificationById(contact.getId());

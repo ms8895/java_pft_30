@@ -70,19 +70,22 @@ public class ContactDataGenerator {
         try (Writer writer = new FileWriter(file)) {
             for (ContactData contact : contacts) {
                 writer.write(String.format("%s;%s;%s;%s;%s\n", contact.getFirstname(),
-                        contact.getLastname(),contact.getPhoto().getAbsolutePath(), contact.getAddress(),
-                        contact.getMobilePhone(),contact.getEmail(), contact.getGroup()));
+                        contact.getLastname(), contact.getPhoto().getAbsolutePath(), contact.getAddress(),
+                        contact.getMobilePhone(), contact.getEmail(), contact.getGroup()));
             }
         }
     }
-/*-c 1 -f src/test/resources/contacts.xml -d xml*/
+
+    /*-c 1 -f src/test/resources/contacts.xml -d xml*/
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
             File photo = new File("./src/test/resources/contact.jpg/");// Для xml
             contacts.add(new ContactData().withFirstname(String.format("Fill %s", i))
                     .withLastname(String.format("Bender %s", i)).withPhoto(photo).withAddress(String.format("street %s", i))
-                    .withMobilePhone(String.format("+895566423")).withEmail(String.format("Test1@lki.com"))
+                    .withHomePhone(String.format("+89556642%s", i)).withMobilePhone(String.format("+%s95566423", i))
+                    .withWorkPhone(String.format("+89556642%s", i)).withEmail(String.format("Email1@lki.com"))
+                    .withEmail2(String.format("email21@lki.com")).withEmail3(String.format("EMAIL%s@lki.com", i))
                     .withGroup(String.format("Test1")));
         }
         return contacts;
