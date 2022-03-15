@@ -65,7 +65,7 @@ public class ContactHelper extends HelperBase {
 
     public void createContactIfNotExist(ContactData contactData) {
         if (app.db().contacts().size() == 0) {
-            app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroup())
+            app.group().createGroupIfNotExist(new GroupData().withName(contactData.getGroups().iterator().next().getName())
                     .withHeader("Test2").withFooter("Test3"));
             app.goTo().contactPage();
             app.сontact().create(contactData);
@@ -99,7 +99,7 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElement(By.name("new_group")).findElements(By.tagName("option"));
         for (WebElement element : elements) {
             String group = element.getText();
-            if (group.equals(contactData.getGroup())) {
+            if (group.equals(contactData.getGroups().iterator().next().getName())) {
                 element.click();
                 return;
             }

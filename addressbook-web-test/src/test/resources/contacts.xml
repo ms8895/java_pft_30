@@ -9,7 +9,12 @@
     <email>Email1@lki.com</email>
     <email2>email21@lki.com</email2>
     <email3>EMAIL0@lki.com</email3>
-    <group>Test1</group>
     <photo>.\src\test\resources\contact.jpg</photo>
+    <groups>
+      <group>
+        <name>Test 1</name>
+        <contacts/>
+      </group>
+    </groups>
   </contact>
 </list>

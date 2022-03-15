@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -13,11 +14,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactPhoneEmailTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
+        Groups groups = app.db().groups();
         app.goTo().homePage();
         app.сontact().createContactIfNotExist(new ContactData().withFirstname("Ostap").withLastname("Bender")
                 .withAddress("221B Baker Street").withHomePhone("132 171").withMobilePhone("645-222")
                 .withWorkPhone("+3(336)").withPhone2("+7 (495) 781-3436 +2016")
-                .withEmail("testTest@mail.ru").withEmail2("dfg@mail.ru").withEmail3("57f@test.com").withGroup("Test1"));
+                .withEmail("testTest@mail.ru").withEmail2("dfg@mail.ru").withEmail3("57f@test.com").inGroup(groups.iterator().next()));
     }
 
     @Test

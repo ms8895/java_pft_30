@@ -57,7 +57,7 @@ public class ContactCreationTest extends TestBase {
     public void testContactCreation(ContactData contact) throws Exception {
         app.goTo().homePage();
         Contacts before = app.db().contacts();
-        GroupData group = new GroupData().withName(contact.getGroup());
+        GroupData group = new GroupData().withName(contact.getGroups().iterator().next().getName());
         app.сontact().createGroupAndContact(group, contact);
         assertThat(app.сontact().count(), equalTo(before.size() + 1));
         Contacts after = app.db().contacts();
