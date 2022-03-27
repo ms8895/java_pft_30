@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
     private ApplicationManager app;
@@ -36,6 +37,21 @@ public class ContactHelper extends HelperBase {
         click(By.name("firstname"));
     }
 
+    public void selectToGroupById(int id) {
+        wd.findElement(By.xpath("//select[@name='to_group']/option[@value='" + id + "']")).click();
+        //$x("//select[@name='to_group']/option[@value='188']") //Проверка в консоли
+    }
+
+    public void selectToGroupByIdWithContact(int id) {
+        wd.findElement(By.xpath("//select[@name='group']/option[@value='" + id + "']")).click();
+        //$x("//select[@name='to_group']/option[@value='188']") //Проверка в консоли
+    }
+
+    public void selectContactForGroupById(int id) {
+        wd.findElement(By.xpath("//*[@id='" + id + "']")).click();
+    }
+
+    ////*[@id="260"]
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
@@ -72,6 +88,70 @@ public class ContactHelper extends HelperBase {
         }
     }
 
+    public GroupData createGroup(GroupData groupData) {
+        Set<GroupData> result = app.db().groups();
+        for (GroupData group : result) {
+            if (group.getName().equals(groupData.getName())) {
+                return group;
+            }
+        }
+        app.group().create(groupData);
+        result = app.db().groups();
+        for (GroupData group : result) {
+            if (group.getName().equals(groupData.getName())) {
+                return group;
+            }
+        }
+        throw new IllegalStateException();
+    }
+
+    public ContactData createUniqContact(ContactData contactData) {
+        Set<ContactData> result = app.db().contacts();
+        for (ContactData contact : result) {
+            if (contact.getFirstname().equals(contactData.getFirstname())
+                    && contact.getLastname().equals(contactData.getLastname())
+                    && contact.getGroups().size() > 0
+                    && contact.getGroups().size() == contactData.getGroups().size()
+                    && contact.getGroups().iterator().next().getName().equals(contactData.getGroups().iterator().next()
+                    .getName())) {
+                return contact;
+            }
+        }
+        app.сontact().create(contactData);
+        result = app.db().contacts();
+        for (ContactData contact : result) {
+            if (contact.getFirstname().equals(contactData.getFirstname())
+                    && contact.getLastname().equals(contactData.getLastname())
+                    && contact.getGroups().size() > 0
+                    && contact.getGroups().size() == contactData.getGroups().size()
+                    && contact.getGroups().iterator().next().getName().equals(contactData.getGroups().iterator().next()
+                    .getName())) {
+                return contact;
+            }
+        }
+        throw new IllegalStateException();
+    }
+
+
+    //Создание контакта и группы // Использовать при удалении из группы
+    public void createContactForGroup(ContactData contactData, GroupData groupData) {
+        if (app.db().contacts().size() == 0) {
+            app.goTo().contactPage();
+            app.сontact().createContact(contactData);
+        } else if (app.db().groups().size() == 0) {
+            app.group().createGroupIfNotExist(groupData);
+        }
+    }
+
+    //Создание контакта для добавления в группу // Исполбзовать при удалении из группы
+    public void createContact(ContactData contact) {
+        initContactCreation();
+        fillContactForm(contact);
+        submitContactCreation();
+        contactCache = null;
+        returnContactHomePage();
+    }
+
     public void create(ContactData contact) {
         initContactCreation();
         fillContactForm(contact);
@@ -104,6 +184,22 @@ public class ContactHelper extends HelperBase {
                 return;
             }
         }
+    }
+
+    //Для добавления в группу
+    public void addGroup(ContactData contact, GroupData group) {
+        app.goTo().homePage();
+        selectToGroupById(group.getId());
+        selectContactForGroupById(contact.getId());
+        contactAddGroup();
+    }
+
+    public void contactAddGroup() {
+        click(By.name("add"));
+    }
+
+    public void contactRemoveFromGroup() {
+        click(By.name("remove"));
     }
 
     public void modify(ContactData contact) {

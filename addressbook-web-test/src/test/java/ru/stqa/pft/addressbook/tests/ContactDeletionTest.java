@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 
@@ -16,7 +15,6 @@ public class ContactDeletionTest extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondition() {
-        Groups groups = app.db().groups();
         app.goTo().homePage();
         app.сontact().createContactIfNotExist(new ContactData().withFirstname("Ostap").withLastname("Bender")
                 .withPhoto(new File("./src/test/resources/contact.jpg/"))
