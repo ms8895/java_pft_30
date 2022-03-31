@@ -133,17 +133,17 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    //Создание контакта и группы // Использовать при удалении из группы
+    //Создание контакта и группы
     public void createContactForGroup(ContactData contactData, GroupData groupData) {
         if (app.db().contacts().size() == 0) {
             app.goTo().contactPage();
             app.сontact().createContact(contactData);
-        } else if (app.db().groups().size() == 0) {
+        } if (app.db().groups().size() == 0) {
             app.group().createGroupIfNotExist(groupData);
         }
     }
 
-    //Создание контакта для добавления в группу // Исполбзовать при удалении из группы
+    //Создание контакта для добавления в группу
     public void createContact(ContactData contact) {
         initContactCreation();
         fillContactForm(contact);
