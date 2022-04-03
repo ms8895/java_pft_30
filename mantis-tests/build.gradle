@@ -11,6 +11,7 @@ dependencies {
     implementation 'it.ozimov:hamcrest:2.0.0'
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'org.apache.httpcomponents:httpcore:4.4.15'
+    implementation 'commons-net:commons-net:3.4'
 }
 test {
     useTestNG {
