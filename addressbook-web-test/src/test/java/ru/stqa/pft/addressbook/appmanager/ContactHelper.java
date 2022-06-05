@@ -138,18 +138,20 @@ public class ContactHelper extends HelperBase {
         if (app.db().contacts().size() == 0) {
             app.goTo().contactPage();
             app.сontact().createContact(contactData);
-        } if (app.db().groups().size() == 0) {
+        }
+        if (app.db().groups().size() == 0) {
             app.group().createGroupIfNotExist(groupData);
         }
     }
 
     //Создание контакта для добавления в группу
-    public void createContact(ContactData contact) {
+    public ContactData createContact(ContactData contact) {
         initContactCreation();
         fillContactForm(contact);
         submitContactCreation();
         contactCache = null;
         returnContactHomePage();
+        return contact;
     }
 
     public void create(ContactData contact) {
@@ -192,6 +194,32 @@ public class ContactHelper extends HelperBase {
         selectToGroupById(group.getId());
         selectContactForGroupById(contact.getId());
         contactAddGroup();
+    }
+
+    public void addGroup(int contact, GroupData group) {
+        app.goTo().homePage();
+        selectToGroupById(group.getId());
+        selectContactForGroupById(contact);
+        contactAddGroup();
+    }
+
+    public void addGroup(int contact, int group) {
+        app.goTo().homePage();
+        selectToGroupById(group);
+        selectContactForGroupById(contact);
+        contactAddGroup();
+    }
+
+    public ContactData testContact() {
+        Contacts contacts = app.db().contacts();
+        for (ContactData contact : contacts) {
+            if (contact.getGroups().size() != 0) {
+            }
+            if (contact.getGroups().size() == 0) {
+                return contact;
+            }
+        }
+        return null;
     }
 
     public void contactAddGroup() {
