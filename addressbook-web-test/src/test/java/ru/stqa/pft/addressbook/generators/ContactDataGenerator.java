@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactDataGenerator {
+
     @Parameter(names = "-c", description = "Contact count")
     public int count;
     @Parameter(names = "-f", description = "Target file")
@@ -69,19 +71,24 @@ public class ContactDataGenerator {
         //System.out.println(new File(".").getAbsolutePath());
         try (Writer writer = new FileWriter(file)) {
             for (ContactData contact : contacts) {
-                writer.write(String.format("%s;%s;%s;%s\n", contact.getFirstname(),
-                        contact.getLastname(), contact.getAddress(), contact.getPhoto().getAbsolutePath()));
+                writer.write(String.format("%s;%s;%s;%s;%s\n", contact.getFirstname(),
+                        contact.getLastname(), contact.getPhoto().getAbsolutePath(), contact.getAddress(),
+                        contact.getMobilePhone(), contact.getEmail(), contact.getGroups().iterator().next().getName()));
             }
         }
     }
 
+    /*-c 1 -f src/test/resources/contacts.xml -d xml*/
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
             File photo = new File("./src/test/resources/contact.jpg/");// Для xml
-            contacts.add(new ContactData().withFirstname(String.format("firstname %s", i))
-                    .withLastname(String.format("lastname %s", i)).withAddress(String.format("address %s", i))
-                    .withPhoto(photo));
+            contacts.add(new ContactData().withFirstname(String.format("Fill %s", i))
+                    .withLastname(String.format("Bender %s", i)).withPhoto(photo).withAddress(String.format("street %s", i))
+                    .withHomePhone(String.format("+89556642%s", i)).withMobilePhone(String.format("+%s95566423", i))
+                    .withWorkPhone(String.format("+89556642%s", i)).withEmail(String.format("Email1@lki.com"))
+                    .withEmail2(String.format("email21@lki.com")).withEmail3(String.format("EMAIL%s@lki.com", i))
+                    .inGroup(new GroupData().withName("Test 1")));
         }
         return contacts;
     }

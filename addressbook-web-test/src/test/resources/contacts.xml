@@ -1,20 +1,20 @@
 <list>
   <contact>
-    <firstname>firstname 0</firstname>
-    <lastname>lastname 0</lastname>
-    <address>address 0</address>
+    <firstname>Fill 0</firstname>
+    <lastname>Bender 0</lastname>
+    <address>street 0</address>
+    <homePhone>+895566420</homePhone>
+    <mobilePhone>+095566423</mobilePhone>
+    <workPhone>+895566420</workPhone>
+    <email>Email1@lki.com</email>
+    <email2>email21@lki.com</email2>
+    <email3>EMAIL0@lki.com</email3>
     <photo>.\src\test\resources\contact.jpg</photo>
-  </contact>
-  <contact>
-    <firstname>firstname 1</firstname>
-    <lastname>lastname 1</lastname>
-    <address>address 1</address>
-    <photo>.\src\test\resources\contact.jpg</photo>
-  </contact>
-  <contact>
-    <firstname>firstname 2</firstname>
-    <lastname>lastname 2</lastname>
-    <address>address 2</address>
-    <photo>.\src\test\resources\contact.jpg</photo>
+    <groups>
+      <group>
+        <name>Test 1</name>
+        <contacts/>
+      </group>
+    </groups>
   </contact>
 </list>

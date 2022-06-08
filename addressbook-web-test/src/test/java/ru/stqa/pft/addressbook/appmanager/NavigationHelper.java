@@ -33,4 +33,15 @@ public class NavigationHelper extends HelperBase {
         }
         click(By.linkText("home"));
     }
+    //ПЕРЕХОД В ГРУУПУ, В КОТОРУЮ ДОБАВИЛИ КОНТАКТ
+    //#content > div > i > a //*/div/i/a
+   // wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+    // "a[href='./?group=" + id + "']"
+    public void addedGroupPage(int id) {
+        if (isElementPresent(By.tagName("i"))
+                && wd.findElement(By.tagName("i")).getText().equals("Go to")) {
+            return;
+        }
+        click(By.cssSelector("a[href='./?group=" + id + "']"));
+    }
 }
