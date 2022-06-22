@@ -19,6 +19,7 @@ dependencies {
     implementation 'mysql:mysql-connector-java:5.1.38'
     implementation 'org.hibernate:hibernate-core:5.6.5.Final'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.6.1'
+    implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
 
 }
 test {
