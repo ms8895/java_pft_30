@@ -23,18 +23,18 @@ public class Collections {
             System.out.println("Я выучу язык " + l);
         }
 
-        //Инициализация массива в одну строку
+        //One line array initialization
         List<String> firstLanguages = Arrays.asList("Java", "Python", "C#", "PHP");
         for (String l : firstLanguages) {
             System.out.println("Нужно выучить язык " + l);
         }
 
-        //Итерация по элементам списка с помощью переменной счетчика
+        //Iterating over the elements of a list with a counter variable
         List<String> twoLanguages = Arrays.asList("Java", "Python", "C#", "PHP");
         for (int i = 0; i < twoLanguages.size(); i++) {
             System.out.println("Язык " + twoLanguages.get(i));
         }
-        //Список объектов произвольного типа
+        //List of objects of arbitrary type
         List threeLanguages = Arrays.asList("Java", "Python", "C#", "PHP");
         for (Object l : threeLanguages) {
             System.out.println("Выучи " + l);
