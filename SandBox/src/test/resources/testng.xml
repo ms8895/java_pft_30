@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="SandBox" >
+        <classes>
+            <class name="ru.stqa.pft.sandbox.EquationTest" />
+            <class name="ru.stqa.pft.sandbox.PointTest" />
+            <class name="ru.stqa.pft.sandbox.PrimesTests" />
+            <class name="ru.stqa.pft.sandbox.SquareTests" />
+        </classes>
+    </test>
+</suite>
