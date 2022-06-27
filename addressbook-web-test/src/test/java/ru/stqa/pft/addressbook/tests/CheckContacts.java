@@ -63,7 +63,7 @@ public class CheckContacts extends TestBase {
     public ContactData contactForGroup() {
         Contacts contacts = app.db().contacts();
         for (ContactData contact : contacts) {
-            //System.out.println("ИЗ ЦИКЛА  "+ contact.getGroups().isEmpty() +"КОНТАКТ");
+            //System.out.println("из цикла  "+ contact.getGroups().isEmpty() +"контакт");
             if (!contact.getGroups().isEmpty()) {
                 //return contact;
             } /*else {
@@ -95,7 +95,7 @@ public class CheckContacts extends TestBase {
             if (contact.getGroups().size() != 0) {
             }
             if (contact.getGroups().size() == 0) {
-                System.out.println("КОНТАКТ 2 " + contact + " ВТОРОГО УСЛОВИЯ");
+                System.out.println("контакт 2 " + contact + " второго условия");
                 return contact.getId();
             } else {
                 app.goTo().contactPage();
@@ -104,7 +104,7 @@ public class CheckContacts extends TestBase {
                         .withAddress("221B Baker Street").withHomePhone("789").withMobilePhone("78963145")
                         .withWorkPhone("213549873").withEmail("testTest@mail.ru").withEmail2("widh@njv.oo")
                         .withEmail3("klnsv@sni.oo")));
-                System.out.println("КОНТАКТ 3 " + contact + " ТРЕТЬЕГО УСЛОВИЯ");
+                System.out.println("контакт 3 " + contact + " третьего условия");
                 return contact.getId();
             }
         }
