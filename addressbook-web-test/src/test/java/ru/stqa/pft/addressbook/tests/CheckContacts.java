@@ -63,7 +63,7 @@ public class CheckContacts extends TestBase {
     public ContactData contactForGroup() {
         Contacts contacts = app.db().contacts();
         for (ContactData contact : contacts) {
-            //System.out.println("ИЗ ЦИКЛА "+ contact.getGroups().isEmpty() +"КОНТАКТ");
+            //System.out.println("ИЗ ЦИКЛА  "+ contact.getGroups().isEmpty() +"КОНТАКТ");
             if (!contact.getGroups().isEmpty()) {
                 //return contact;
             } /*else {
