@@ -56,10 +56,10 @@ public class GroupCreationTests extends TestBase {
     public void testGroupCreation(GroupData group) throws Exception {
         app.goTo().groupPage();
         Groups before = app.db().groups();
-        System.out.println("КОЛИЧЕСТВО групп ДО " + before.size());
+        System.out.println("КОЛИЧЕСТВО ГРУПП ДО  " + before.size());
         app.group().create(group);
         assertThat(app.group().count(), equalTo(before.size() + 1));
-        System.out.println("КОЛИЧЕСТВО групп после" + app.group().count());
+        System.out.println("КОЛИЧЕСТВО ГРУПП ПОСЛЕ " + app.group().count());
         Groups after = app.db().groups();
         assertThat(after, equalTo(
                 before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
