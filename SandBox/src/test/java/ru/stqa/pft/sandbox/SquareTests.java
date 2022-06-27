@@ -2,7 +2,7 @@ package ru.stqa.pft.sandbox;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+//Добавлен комментарий для проверки
 public class SquareTests {
     @Test
     public void testArea() {
