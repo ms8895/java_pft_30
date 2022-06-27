@@ -27,13 +27,13 @@ public class CheckContacts extends TestBase {
         if (app.db().contacts().iterator().next().getGroups().size() == 0) {
             //app.db().contacts().iterator().next().getId();
             int contact = app.db().contacts().iterator().next().getId();
-            System.out.println("АЙДИ " + contact + " КОНТАКТА");
+            System.out.println("айди " + contact + " контакта");
             int group = app.db().groups().iterator().next().getId();
             app.сontact().addGroup(contact, group);
             *//*app.goTo().addedGroupPage(group.getId());*//*
             //System.out.println("Контакт без группы");
         } else {
-            System.out.println("ПРИВЕТ");
+            System.out.println("HELLO");
         }
 
         */
