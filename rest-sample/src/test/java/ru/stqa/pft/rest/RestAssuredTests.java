@@ -33,6 +33,7 @@ public class RestAssuredTests extends TestBase {
         String json = RestAssured.get("https://bugify.stqa.ru/api/issues.json").asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
+        System.out.println(issues);
 
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
         }.getType());
