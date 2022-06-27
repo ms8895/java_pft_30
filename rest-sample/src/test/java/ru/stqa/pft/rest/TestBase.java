@@ -71,7 +71,7 @@ public class TestBase {
         }.getType());
         Issue newIssue = Issues.iterator().next();
 
-        if (newIssue.getState_name().equals("resolved") || newIssue.getState_name().equals("closed")) {
+        if (newIssue.getState_name().equals("Resolved") || newIssue.getState_name().equals("Closed")) {
             return false;
         } else {
             return true;
