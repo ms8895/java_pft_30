@@ -53,7 +53,7 @@ public class NewTestContactAddGroup extends TestBase {
             if (contact.getGroups().size() != 0) {
             }
             if (contact.getGroups().size() == 0) {
-                //System.out.println("КОНТАКТ 2 " + contact + " ВТОРОГО УСЛОВИЯ, НЕТ ГРУППЫ!!!");
+                //System.out.println("КОНТАКТ 2" + contact + " ВТОРОГО УСЛОВИЯ, НЕТ ГРУППЫ!!!");
                 return contact.getId();
             /*} else {
                 app.goTo().contactPage();
