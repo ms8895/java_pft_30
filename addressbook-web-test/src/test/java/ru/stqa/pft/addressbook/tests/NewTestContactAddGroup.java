@@ -53,7 +53,7 @@ public class NewTestContactAddGroup extends TestBase {
             if (contact.getGroups().size() != 0) {
             }
             if (contact.getGroups().size() == 0) {
-                //System.out.println("КОНТАКТ 2" + contact + " ВТОРОГО УСЛОВИЯ, нет группы!!!");
+                //System.out.println("КОНТАКТ 2 " + contact + " ВТОРОГО УСЛОВИЯ, НЕТ ГРУППЫ!!!");
                 return contact.getId();
             /*} else {
                 app.goTo().contactPage();
@@ -62,7 +62,7 @@ public class NewTestContactAddGroup extends TestBase {
                         .withAddress("221B Baker Street").withHomePhone("789").withMobilePhone("78963145")
                         .withWorkPhone("213549873").withEmail("testTest@mail.ru").withEmail2("widh@njv.oo")
                         .withEmail3("klnsv@sni.oo")));
-                System.out.println("КОНТАКТ 3" + contact + " ТРЕТЬЕГО УСЛОВИЯ");
+                System.out.println("КОНТАКТ 3 " + contact + " ТРЕТЬЕГО УСЛОВИЯ");
                 return contact.getId();
             }*/
             }
