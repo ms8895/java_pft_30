@@ -76,6 +76,12 @@ public class TestBase {
         } else {
             return true;
         }
+        /*if (newIssue.getState_name().equals("Open") || newIssue.getState_name().equals("Re-opened")
+                || newIssue.getState_name().equals("In Progress")) {
+            return true;
+        } else {
+            return false;
+        }*/
     }
 
     public void skipIfNotFixed(int issueId) throws IOException {
