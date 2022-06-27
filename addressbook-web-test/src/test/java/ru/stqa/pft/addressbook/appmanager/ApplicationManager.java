@@ -45,7 +45,6 @@ public class ApplicationManager {
             wd = new FirefoxDriver();
         } else if (browser.equals(BrowserType.OPERA)) {
             System.setProperty("webdriver.opera.driver", "C:\\webdriver\\operadriver\\operadriver.exe");
-
             wd = new OperaDriver();
         }
 
