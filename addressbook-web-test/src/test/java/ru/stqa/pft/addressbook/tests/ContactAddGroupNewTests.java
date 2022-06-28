@@ -9,7 +9,7 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 
-public class NewTestContactAddGroup extends TestBase {
+public class ContactAddGroupNewTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
         app.goTo().groupPage();
