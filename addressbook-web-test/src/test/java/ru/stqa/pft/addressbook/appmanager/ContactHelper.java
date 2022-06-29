@@ -244,6 +244,7 @@ public class ContactHelper extends HelperBase {
         deleteSelectedContact();
         contactCache = null;
         AcceptAlertContact();
+        returnContactHomePage();
     }
 
     public void createGroupAndContact(GroupData group, ContactData contact) {
