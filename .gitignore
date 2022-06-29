@@ -2,7 +2,6 @@
 build/
 out/
 /.idea/*
-addressbook-web-test/jenkins_screenshots/
 
 # Ignore Gradle GUI config
 gradle-app.setting
